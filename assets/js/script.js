@@ -25,19 +25,17 @@ function displayCityInfo(city) {
                 // H2 for City Name
                 var cityName = $("<h2>").text(data.name);
                 resultsToday.append(cityName);
-
                 // P for description, temp, wind, humidity
-                var todayDesc = $("<p>").text("Description: " + JSON.stringify(data.weather[0]));
+                var todayDesc = $("<p>").text("Description: " + data.weather[0].description);
                 resultsToday.append(todayDesc);
-
-                var todayTemp = $("<p>").text("Temperature: " + JSON.stringify(data.main.temp) + "c");
+                var fahrenheitTemp = data.main.temp;
+                var celsiusTemp = (fahrenheitTemp - 273.15);
+                var todayTemp = $("<p>").text("Temperature: " + celsiusTemp.toFixed(2) + "°C");
                 resultsToday.append(todayTemp);
                     // var celsiusTemp = data.main.temp - 273.15
-
-                var todayWind = $("<p>").text("Wind: " + JSON.stringify(data.wind));
+                var todayWind = $("<p>").text("Wind Speed: " + data.wind.speed + " m/s, Direction: " + data.wind.deg + "°");
                 resultsToday.append(todayWind);
-
-                var todayHumidity = $("<p>").text("Humidity: " + JSON.stringify(data.main.humidity));
+                var todayHumidity = $("<p>").text("Humidity: " + data.main.humidity  + "%");
                 resultsToday.append(todayHumidity);
             });
     }

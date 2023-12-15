@@ -14,16 +14,76 @@ color: white;
 font-size: 50px;
 }
 
+h2 {
+font-size: 28px;
+font-weight: bold;
+}
+
+h3 {
+
+}
+
+p {
+font-size: 20px;
+}
+
 .form-label {
-text-align: left;
-font-size: 32px;
+
 }
 
 .search-form {
-color: red;
+
 }
 
 .search-button {
     background-color: rgba(0, 255, 0, 0.6);
     font-weight: bold;
+}
+
+button {
+border-radius: 20%;
+}
+
+.history-button {
+    color: black;
+    background-color: lightgray;
+    display: inline;
+}
+
+.search-form {
+
+}
+
+.search-input {
+
+}
+
+.history button {
+
+}
+
+#today {
+border: solid 5px;
+border-color: black;
+display: grid;
+padding: 25px;
+}
+
+#forecast {
+
+}
+
+aside {
+
+}
+
+.left-side-container {
+    display: inline-flex;
+    justify-content: left;
+    padding: 25px;
+}
+
+.right-side-container {
+    display: inline-flex;
+    padding: 25px;
 }
