@@ -7,39 +7,11 @@ var APICallGeocoding = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityI
 
 var resultsToday = $("#today")
 
-// Function to add buttons to screen on submit
 var cities = ["London", "Bogota", "New York", "Seoul"];
 
-function renderButtons() {
- $("#history").empty();
-
- for (let index = 0; index < cities.length; index++) { 
-   var historyButton = $("<button>");
-   historyButton.addClass("history-button");
-   historyButton.attr("data-name", cities[index]); 
-   historyButton.text(cities[index]); 
-   $("#history").append(historyButton);
-  
-   console.log(cities);
-  $("#list-group").append(`<button>${cities[index]}</button>`);
-};
-
-$("#search-button").on("click", function (event) {
-    event.preventDefault();
-    var textInput = $(cityInput).val();
-    cities.push(textInput);
-    renderButtons();
-    displayCityInfo();
-});
- }
-
 // Displays city info
-function displayCityInfo() {
-    var city = cityInput.val();
+function displayCityInfo(city) {
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
-
-    $("#search-button").on("click", function (event) {
-        event.preventDefault();
 
         fetch(queryURL)
             .then(function (response) {
@@ -48,9 +20,11 @@ function displayCityInfo() {
             .then(function (data) {
                 console.log(data);
 
+                resultsToday.empty();
+
                 // H2 for City Name
-                var city = $("<h2>").text(data.name);
-                resultsToday.append(city);
+                var cityName = $("<h2>").text(data.name);
+                resultsToday.append(cityName);
 
                 // P for description, temp, wind, humidity
                 var todayDesc = $("<p>").text("Description: " + JSON.stringify(data.weather[0]));
@@ -66,5 +40,32 @@ function displayCityInfo() {
                 var todayHumidity = $("<p>").text("Humidity: " + JSON.stringify(data.main.humidity));
                 resultsToday.append(todayHumidity);
             });
-    });
+    }
+
+// Function to add buttons to screen on submit
+function renderButtons() {
+ $("#history").empty();
+
+ for (let index = 0; index < cities.length; index++) { 
+   var historyButton = $("<button>");
+   historyButton.addClass("history-button");
+   historyButton.attr("data-name", cities[index]); 
+   historyButton.text(cities[index]); 
+   $("#history").append(historyButton);
+
+   $(".history-button").on("click", function(event) {
+    var cityName = $(this).attr("data-name");
+    displayCityInfo(cityName);
+   });
+ }  
 }
+
+renderButtons();
+
+$("#search-button").on("click", function (event) {
+    event.preventDefault();
+    var textInput = cityInput.val();
+    cities.push(textInput);
+    renderButtons();
+    displayCityInfo(textInput);
+});
