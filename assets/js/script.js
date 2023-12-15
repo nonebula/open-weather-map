@@ -2,55 +2,39 @@
 // `https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}`.
 
 var APIKey = "6be34685c16ee0bfc0d0c732f2d8ba7c";
+var cityInput = $("#search-input");
+var APICallGeocoding = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityInput + "&appid=" + APIKey;
 
-var queryURL = "api.openweathermap.org/data/2.5/weather?q=" +{city} + "&appid=6be34685c16ee0bfc0d0c732f2d8ba7c";
-
-var city;
 
 // Displays city info
 function displayCityInfo() {
-  
-    var city = $(this).attr("data-name");
-    var queryURL = "---" + city + "---";
-  
-    fetch(queryURL)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      $("#form-heading").text(JSON.stringify(data))
-  });
-  
-  }
-  
-   // This .on("click") function will trigger the Fetch Call
-   $("#find-city").on("click", function(event) {
+    var city = cityInput.val();
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInput.val() + "&appid=" + APIKey;
 
-    // Preventing the submit button from trying to submit the form
+    $("#search-button").on("click", function (event) {
+        event.preventDefault();
+
+        fetch(queryURL)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                console.log(data);
+                $("#today-title").text(city);
+                var celsiusTemp = data.main.temp - 273.15
+                $("#today-temp").text(celsiusTemp);
+                $("#today-wind").text(JSON.stringify(data.wind));
+                $("#today-humidity").text(JSON.stringify(data.main.humidity));
+            });
+    });
+}
+
+$("#search-button").on("click", function (event) {
     event.preventDefault();
-  
-    // Here we grab the text from the input box
-    var movie = $("#movie-input").val();
-  
-    // Here we construct our URL
-    var queryURL = "---" + movie + "---";
-  
-    // Write code between the dashes below to hit the queryURL with fetch(), then take the response data
-    // and display it in the div with an id of movie-view
-  
-    fetch(queryURL)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-      JSON.stringify(data);
-      $("#form-heading").text(JSON.stringify(data));
-    })
-    // =================================================================
-  });
+    displayCityInfo();
+});
 
-  $(document).on("click", ".city", displayCityInfo);
+// $(document).on("click", ".city", displayCityInfo);
 
 /*
 You'll want to allow your application to accept user input and store it in the variable 
@@ -224,11 +208,10 @@ $("#add-movie").on("click", function(event) {
 
 });
 
-//added
-$(document).on("click", ".movie", displayMovieInfo);
-
 // Calling the renderButtons function to display the initial buttons
 renderButtons();
 */
 
-/* LESSON 2 TASK 5 - POSTING BUTTONS ON CLICK (ADDING TO ARRAY)
+//LESSON 2 TASK 5 - POSTING BUTTONS ON CLICK (ADDING TO ARRAY);
+
+// 

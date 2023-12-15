@@ -1,0 +1,29 @@
+.weather-header {
+ background-color: rgba(255, 0, 0, 0.6);
+ font-family: Arial, Helvetica, sans-serif;
+ display: flex;
+ justify-content: center;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+color: white;
+font-size: 50px;
+}
+
+.form-label {
+text-align: left;
+font-size: 32px;
+}
+
+.search-form {
+color: red;
+}
+
+.search-button {
+    background-color: rgba(0, 255, 0, 0.6);
+    font-weight: bold;
+}
