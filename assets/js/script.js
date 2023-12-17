@@ -3,7 +3,7 @@
 
 var APIKey = "6be34685c16ee0bfc0d0c732f2d8ba7c";
 var cityInput = $("#search-input");
-var APICallGeocoding = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityInput + "&appid=" + APIKey + "&units=metric";
+// var APICallGeocoding = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityInput + "&appid=" + APIKey + "&units=metric";
 
 var resultsToday = $("#today")
 var resultsFuture = $("#forecast")
@@ -79,7 +79,7 @@ function renderButtons() {
 
  for (let index = 0; index < cities.length; index++) { 
    var historyButton = $("<button>");
-   historyButton.addClass("history-button");
+   historyButton.addClass("btn btn-primary history-button");
    historyButton.attr("data-name", cities[index]); 
    historyButton.text(cities[index]); 
    $("#history").append(historyButton);
@@ -93,9 +93,12 @@ function renderButtons() {
 
 renderButtons();
 
-/* function futureForecast(city) {
+function futureForecast(city) {
     $("#forecast").empty();
     var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey + "&units=metric";
+    
+    // var lat = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + API key;
+    // var long = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + API key;
 
     fetch(queryURL)
     .then(function (response) {
@@ -103,14 +106,15 @@ renderButtons();
     })
     .then(function (data) {
         //want to use long/lat of city to fetch info on city
-        console.log(data);
+        var forecastList = data.list;
+ 
+        console.log(forecastList);
                 // H2 for 5-Day Forecast
                 
                 // P for description, temp, wind, humidity
 
     })
 };
-*/
 
 // Save event
 function saveHistory(event) {
@@ -126,21 +130,13 @@ function saveHistory(event) {
         });
 }
 
-// Implement bootstrap - html header
-// Implement bootstrap - buttons
-// Implement bootstrap - form & search
-// Implement bootstrap - cards (+ new 5 days cards)
-//  README File
-
-
-
 $("#search-button").on("click", function (event) {
     event.preventDefault();
     var textInput = cityInput.val();
     cities.push(textInput);
     renderButtons();
     displayCityInfo(textInput);
-    //futureForecast();
+    futureForecast(textInput);
     saveHistory();
 });
 
@@ -150,3 +146,9 @@ $("#search-button").on("click", function (event) {
 var today = dayjs().format("dddd DD MMMM YYYY");
 $("#currentDay").text(today);
 */
+
+
+// Implement bootstrap - html header
+// Implement bootstrap - form & search
+// Implement bootstrap - cards (+ new 5 days cards)
+//  README File

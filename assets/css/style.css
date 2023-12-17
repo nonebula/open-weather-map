@@ -36,8 +36,7 @@ font-size: 20px;
 }
 
 .search-button {
-    background-color: rgba(0, 255, 0, 0.6);
-    font-weight: bold;
+
 }
 
 button {
@@ -45,9 +44,7 @@ border-radius: 20%;
 }
 
 .history-button {
-    color: black;
-    background-color: lightgray;
-    display: inline;
+
 }
 
 .search-form {
@@ -65,7 +62,7 @@ border-radius: 20%;
 #today {
 border: solid 5px;
 border-color: black;
-display: grid;
+/* display: grid; */
 padding: 25px;
 }
 
@@ -77,11 +74,14 @@ aside {
 
 }
 
+ */
+
 .left-side-container {
-    display: inline-flex;
+    /* display: inline-flex; */
     justify-content: left;
     padding: 25px;
 }
+
 
 .right-side-container {
     display: inline-flex;
