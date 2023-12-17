@@ -8,7 +8,7 @@ var cityInput = $("#search-input");
 var resultsToday = $("#today")
 var resultsFuture = $("#forecast")
 
-var cities = ["London", "Bogota", "New York", "Seoul"];
+var cities = [];
 
 // local storage check
 $(document).ready(function () {
@@ -21,17 +21,17 @@ $(document).ready(function () {
 
     if (searchHistory.length > 0) {
         var lastSearchedCity = searchHistory[searchHistory.length - 1];
-        displayCityInfo(lastSearchedCity);
+        // displayCityInfo(lastSearchedCity);
     }
 });
 
 
 var textInput = cityInput.val();
-    displayCityInfo(textInput)
-        .then(function (search) {
-            localStorage.setItem("search-history", JSON.stringify(search));
-            console.log("Stored search history:", search);
-        })
+    // displayCityInfo(textInput)
+    //     .then(function (search) {
+    //         localStorage.setItem("search-history", JSON.stringify(search));
+    //         console.log("Stored search history:", search);
+        // })
 
 
 // Displays city info
@@ -91,8 +91,7 @@ function renderButtons() {
  }  
 }
 
-renderButtons();
-
+// 5 Day Future Forecast
 function futureForecast(city) {
     $("#forecast").empty();
     var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey + "&units=metric";
@@ -109,6 +108,7 @@ function futureForecast(city) {
         var forecastList = data.list;
  
         console.log(forecastList);
+
                 // H2 for 5-Day Forecast
                 
                 // P for description, temp, wind, humidity
@@ -133,7 +133,10 @@ function saveHistory(event) {
 $("#search-button").on("click", function (event) {
     event.preventDefault();
     var textInput = cityInput.val();
-    cities.push(textInput);
+        if (!cities.includes(textInput)) {
+        cities.push(textInput);
+        }
+
     renderButtons();
     displayCityInfo(textInput);
     futureForecast(textInput);
