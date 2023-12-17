@@ -45,24 +45,30 @@ function displayCityInfo(city) {
             .then(function (data) {
                 // console.log(data);
 
-                resultsToday.empty();
+                // resultsToday.empty();
+
+                var cityNameElement = $(".today-city");
+                var todayDescElement = $(".today-description");
+                var todayTempElement = $(".today-temp");
+                var todayWindElement = $(".today-wind");
+                var todayHumidityElement = $(".today-humidity");
 
                 // H2 for City Name
-                var cityName = $("<h2>").text(data.name); //today's date needs to be added here
+                cityNameElement.text(data.name); //today's date needs to be added here
                 //image thumbnail should be added here
-                resultsToday.append(cityName);
+                // resultsToday.append(cityName);
                 // P for description, temp, wind, humidity
-                var todayDesc = $("<p>").text("Description: " + data.weather[0].description);
-                resultsToday.append(todayDesc);
+                todayDescElement.text("Description: " + data.weather[0].description);
+                // resultsToday.append(todayDesc);
                 // var fahrenheitTemp = data.main.temp;
                 // var celsiusTemp = (fahrenheitTemp - 273.15);
-                var todayTemp = $("<p>").text("Temperature: " + data.main.temp.toFixed(2) + "°C");
-                resultsToday.append(todayTemp);
+                todayTempElement.text("Temperature: " + data.main.temp.toFixed(2) + "°C");
+                // resultsToday.append(todayTemp);
                     // var celsiusTemp = data.main.temp - 273.15
-                var todayWind = $("<p>").text("Wind Speed: " + data.wind.speed + " m/s, Direction: " + data.wind.deg + "°");
-                resultsToday.append(todayWind);
-                var todayHumidity = $("<p>").text("Humidity: " + data.main.humidity  + "%");
-                resultsToday.append(todayHumidity);
+                todayWindElement.text("Wind Speed: " + data.wind.speed + " m/s, Direction: " + data.wind.deg + "°");
+                // resultsToday.append(todayWind);
+                todayHumidityElement.text("Humidity: " + data.main.humidity  + "%");
+                // resultsToday.append(todayHumidity);
                 
                 // console.log(data);
                 return data;
