@@ -10,16 +10,40 @@ var resultsFuture = $("#forecast")
 
 var cities = ["London", "Bogota", "New York", "Seoul"];
 
+// local storage check
+$(document).ready(function () {
+    var searchHistory = JSON.parse(localStorage.getItem("search-history")) || [];
+    
+    for (let index = 0; index < searchHistory.length; index++) {
+        cities.push(searchHistory[index]);
+    }
+    renderButtons();
+
+    if (searchHistory.length > 0) {
+        var lastSearchedCity = searchHistory[searchHistory.length - 1];
+        displayCityInfo(lastSearchedCity);
+    }
+});
+
+
+var textInput = cityInput.val();
+    displayCityInfo(textInput)
+        .then(function (search) {
+            localStorage.setItem("search-history", JSON.stringify(search));
+            console.log("Stored search history:", search);
+        })
+
+
 // Displays city info
 function displayCityInfo(city) {
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey + "&units=metric";
 
-        fetch(queryURL)
+        return fetch(queryURL)
             .then(function (response) {
                 return response.json();
             })
             .then(function (data) {
-                console.log(data);
+                // console.log(data);
 
                 resultsToday.empty();
 
@@ -39,6 +63,13 @@ function displayCityInfo(city) {
                 resultsToday.append(todayWind);
                 var todayHumidity = $("<p>").text("Humidity: " + data.main.humidity  + "%");
                 resultsToday.append(todayHumidity);
+                
+                // console.log(data);
+                return data;
+            })
+            .catch(function (error) {
+                console.error("Error fetching city info:", error);
+                throw error;
             });
     }
 
@@ -62,7 +93,7 @@ function renderButtons() {
 
 renderButtons();
 
-function futureForecast(city) {
+/* function futureForecast(city) {
     $("#forecast").empty();
     var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey + "&units=metric";
 
@@ -79,9 +110,22 @@ function futureForecast(city) {
 
     })
 };
+*/
 
-// Save user input using local storage
-// Regenerate persistent data using local storage
+// Save event
+function saveHistory(event) {
+    var textInput = cityInput.val();
+    displayCityInfo(textInput)
+        .then(function (search) {
+            localStorage.setItem("search-history", JSON.stringify(cities));
+            console.log("Stored search history:", JSON.parse(localStorage.getItem("search-history")));
+
+        })
+        .catch(function (error) {
+            console.log("Error fetching and saving data:", error); 
+        });
+}
+
 // Implement bootstrap - html header
 // Implement bootstrap - buttons
 // Implement bootstrap - form & search
@@ -96,39 +140,11 @@ $("#search-button").on("click", function (event) {
     cities.push(textInput);
     renderButtons();
     displayCityInfo(textInput);
-    futureForecast();
+    //futureForecast();
+    saveHistory();
 });
 
 
-
-/* save button
-function handleSaveEntry(event) {
-    var saveButton = $(event.currentTarget);
-    var blockID = saveButton.closest("tr").attr("id");
-
-    var userEntry = $.trim(
-        $(event.currentTarget)
-            .closest("tr")
-            .find("textarea")
-            .val()
-    );
-
-    blockID = parseInt(blockID);
-    savedInput[blockID] = userEntry;
-    localStorage.setItem("userInput", JSON.stringify(savedInput));
-    if (!isNaN(blockID) && blockID >= 8 && blockID <= 18) {
-}
-}
-*/
-
-/* local storage check
-var workDay = JSON.parse(localStorage.getItem("userInput"));
-if (workDay) {
-    savedInput = workDay;
-} else {
-    savedInput = [];
-}
-*/
 
 /* DAYJS NOTES
 var today = dayjs().format("dddd DD MMMM YYYY");
