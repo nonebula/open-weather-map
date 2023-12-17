@@ -115,9 +115,37 @@ function futureForecast(city) {
  
         console.log(forecastList);
 
-                // H2 for 5-Day Forecast
-                
-                // P for description, temp, wind, humidity
+        var dayOne = $("card day-1-forecast")
+        var dayTwo = $("card day-2-forecast")
+        var dayThree = $("card day-3-forecast")
+        var dayFour = $("card day-4-forecast")
+        var dayFive = $("card day-5-forecast")
+
+        for (let index = 0; index <forecastList.length; index++) {
+            // Generate date for card
+            cityNameElement.text(data.name); //today's date needs to be added here
+            //image thumbnail should be added here
+            // resultsToday.append(cityName);
+            // P for description, temp, wind, humidity
+            todayDescElement.text("Description: " + data.weather[0].description);
+            // resultsToday.append(todayDesc);
+            // var fahrenheitTemp = data.main.temp;
+            // var celsiusTemp = (fahrenheitTemp - 273.15);
+            todayTempElement.text("Temperature: " + data.main.temp.toFixed(2) + "°C");
+            // resultsToday.append(todayTemp);
+            // var celsiusTemp = data.main.temp - 273.15
+            todayWindElement.text("Wind Speed: " + data.wind.speed + " m/s, Direction: " + data.wind.deg + "°");
+            // resultsToday.append(todayWind);
+            todayHumidityElement.text("Humidity: " + data.main.humidity  + "%");
+            // resultsToday.append(todayHumidity);
+        }
+        
+        return data;
+    })
+    .catch(function (error) {
+        console.error("Error fetching city info:", error);
+        throw error;
+    });
 
     })
 };
@@ -159,5 +187,4 @@ $("#currentDay").text(today);
 
 // Implement bootstrap - html header
 // Implement bootstrap - form & search
-// Implement bootstrap - cards (+ new 5 days cards)
 //  README File
