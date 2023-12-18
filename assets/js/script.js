@@ -112,43 +112,32 @@ function futureForecast(city) {
     .then(function (data) {
         //want to use long/lat of city to fetch info on city
         var forecastList = data.list;
- 
         console.log(forecastList);
 
-        var dayOne = $("card day-1-forecast")
-        var dayTwo = $("card day-2-forecast")
-        var dayThree = $("card day-3-forecast")
-        var dayFour = $("card day-4-forecast")
-        var dayFive = $("card day-5-forecast")
+        var forecastContainer = $("forecast");
 
-        for (let index = 0; index <forecastList.length; index++) {
-            // Generate date for card
-            cityNameElement.text(data.name); //today's date needs to be added here
-            //image thumbnail should be added here
-            // resultsToday.append(cityName);
-            // P for description, temp, wind, humidity
-            todayDescElement.text("Description: " + data.weather[0].description);
-            // resultsToday.append(todayDesc);
-            // var fahrenheitTemp = data.main.temp;
-            // var celsiusTemp = (fahrenheitTemp - 273.15);
-            todayTempElement.text("Temperature: " + data.main.temp.toFixed(2) + "°C");
-            // resultsToday.append(todayTemp);
-            // var celsiusTemp = data.main.temp - 273.15
-            todayWindElement.text("Wind Speed: " + data.wind.speed + " m/s, Direction: " + data.wind.deg + "°");
-            // resultsToday.append(todayWind);
-            todayHumidityElement.text("Humidity: " + data.main.humidity  + "%");
-            // resultsToday.append(todayHumidity);
+        for (var i = 0; i < 5; i++) {
+            var dayData = data.list[i * 8];
+            
+            var card = $("<div>").addClass("card").appendTo(forecastContainer);
+            var cardBody = $("<div>").addClass("card-body").appendTo(card);
+
+            var date = new Date(dayData.dt * 1000);
+            var dateString = date.toDateString();
+            $("<h5>").text(dateString).appendTo(cardBody);
+
+            var iconURL = "http://openweathermap.org/img/wn/" + dayData.weather[0].icon + ".png";
+            $("<img>").attr("src", iconURL).addClass("card-img-top").appendTo(cardBody);
+
+            $("<p>").text("Description: " + dayData.weather[0].description).appendTo(cardBody);
+            $("<p>").text("Temperature: " + dayData.main.temp.toFixed(2) + "°C").appendTo(cardBody);
+            $("<p>").text("Wind: " + dayData.wind.speed + "m/s, Direction: " + dayData.wind.deg + "°").appendTo(cardBody);
+            $("<p>").text("Humidity: " + dayData.main.humidity + "%").appendTo(cardBody);
         }
-        
-        return data;
-    })
-    .catch(function (error) {
-        console.error("Error fetching city info:", error);
-        throw error;
-    });
 
-    })
-};
+        return data;
+        });
+    }
 
 // Save event
 function saveHistory(event) {
