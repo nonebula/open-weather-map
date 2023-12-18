@@ -174,15 +174,3 @@ $("#search-button").on("click", function (event) {
     futureForecast(textInput);
     saveHistory();
 });
-
-
-
-/* DAYJS NOTES
-var today = dayjs().format("dddd DD MMMM YYYY");
-$("#currentDay").text(today);
-*/
-
-
-// Implement bootstrap - html header
-// Implement bootstrap - form & search
-//  README File
