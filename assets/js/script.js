@@ -5,9 +5,6 @@ var APIKey = "6be34685c16ee0bfc0d0c732f2d8ba7c";
 var cityInput = $("#search-input");
 // var APICallGeocoding = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityInput + "&appid=" + APIKey + "&units=metric";
 
-var resultsToday = $("#today")
-var resultsFuture = $("#forecast")
-
 var cities = [];
 
 // local storage check
@@ -21,8 +18,10 @@ $(document).ready(function () {
 
     if (searchHistory.length > 0) {
         var lastSearchedCity = searchHistory[searchHistory.length - 1];
-        // displayCityInfo(lastSearchedCity);
+        displayCityInfo(lastSearchedCity);
+        futureForecast(lastSearchedCity);
     }
+
 });
 
 
@@ -36,8 +35,10 @@ var textInput = cityInput.val();
 
 // Displays city info
 function displayCityInfo(city) {
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey + "&units=metric";
+    
+    $("#today").empty();
 
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey + "&units=metric";
         return fetch(queryURL)
             .then(function (response) {
                 return response.json();
@@ -45,30 +46,34 @@ function displayCityInfo(city) {
             .then(function (data) {
                 // console.log(data);
 
-                // resultsToday.empty();
+            var todayContainer = $("#today")
 
-                var cityNameElement = $(".today-city");
-                var todayDescElement = $(".today-description");
-                var todayTempElement = $(".today-temp");
-                var todayWindElement = $(".today-wind");
-                var todayHumidityElement = $(".today-humidity");
+            var todayContainerCard = $("<div>").addClass("card").appendTo(todayContainer);
+            var cardBody = $("<div>").addClass("card-body").appendTo(todayContainerCard);
 
-                // H2 for City Name
-                cityNameElement.text(data.name); //today's date needs to be added here
-                //image thumbnail should be added here
+            $("<h2>").text(data.name).appendTo(cardBody); //today's date needs to be added here
+            var iconURL = "http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png";
+            $("<img>").attr("src", iconURL).addClass("card-img-top today-card-image").appendTo(cardBody);
+            $("<p>").text("Description: " + data.weather[0].description).appendTo(cardBody);
+            $("<p>").text("Temperature: " + data.main.temp.toFixed(2) + "°C").appendTo(cardBody);
+            $("<p>").text("Wind: " + data.wind.speed + "m/s, Direction: " + data.wind.deg + "°").appendTo(cardBody);
+            $("<p>").text("Humidity: " + data.main.humidity + "%").appendTo(cardBody)
+                // // H2 for City Name
+                // cityNameElement.text(data.name); 
+                // //image thumbnail should be added here
                 // resultsToday.append(cityName);
-                // P for description, temp, wind, humidity
-                todayDescElement.text("Description: " + data.weather[0].description);
-                // resultsToday.append(todayDesc);
-                // var fahrenheitTemp = data.main.temp;
-                // var celsiusTemp = (fahrenheitTemp - 273.15);
-                todayTempElement.text("Temperature: " + data.main.temp.toFixed(2) + "°C");
-                // resultsToday.append(todayTemp);
-                    // var celsiusTemp = data.main.temp - 273.15
-                todayWindElement.text("Wind Speed: " + data.wind.speed + " m/s, Direction: " + data.wind.deg + "°");
-                // resultsToday.append(todayWind);
-                todayHumidityElement.text("Humidity: " + data.main.humidity  + "%");
-                // resultsToday.append(todayHumidity);
+                // // P for description, temp, wind, humidity
+                // todayDescElement.text("Description: " + data.weather[0].description);
+                // // resultsToday.append(todayDesc);
+                // // var fahrenheitTemp = data.main.temp;
+                // // var celsiusTemp = (fahrenheitTemp - 273.15);
+                // todayTempElement.text("Temperature: " + data.main.temp.toFixed(2) + "°C");
+                // // resultsToday.append(todayTemp);
+                //     // var celsiusTemp = data.main.temp - 273.15
+                // todayWindElement.text("Wind Speed: " + data.wind.speed + " m/s, Direction: " + data.wind.deg + "°");
+                // // resultsToday.append(todayWind);
+                // todayHumidityElement.text("Humidity: " + data.main.humidity  + "%");
+                // // resultsToday.append(todayHumidity);
                 
                 // console.log(data);
                 return data;
@@ -89,17 +94,20 @@ function renderButtons() {
    historyButton.attr("data-name", cities[index]); 
    historyButton.text(cities[index]); 
    $("#history").append(historyButton);
+ }
 
    $(".history-button").on("click", function(event) {
     var cityName = $(this).attr("data-name");
     displayCityInfo(cityName);
+    futureForecast(cityName);
    });
  }  
-}
+
 
 // 5 Day Future Forecast
 function futureForecast(city) {
     $("#forecast").empty();
+    
     var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey + "&units=metric";
     
     // var lat = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + API key;
@@ -114,7 +122,7 @@ function futureForecast(city) {
         var forecastList = data.list;
         console.log(forecastList);
 
-        var forecastContainer = $("forecast");
+        var forecastContainer = $("#forecast");
 
         for (var i = 0; i < 5; i++) {
             var dayData = data.list[i * 8];
@@ -122,13 +130,9 @@ function futureForecast(city) {
             var card = $("<div>").addClass("card").appendTo(forecastContainer);
             var cardBody = $("<div>").addClass("card-body").appendTo(card);
 
-            var date = new Date(dayData.dt * 1000);
-            var dateString = date.toDateString();
-            $("<h5>").text(dateString).appendTo(cardBody);
-
+            $("<h5>").text(dayjs(dayData.dt_txt).format("dddd, MMMM D")).appendTo(cardBody);
             var iconURL = "http://openweathermap.org/img/wn/" + dayData.weather[0].icon + ".png";
-            $("<img>").attr("src", iconURL).addClass("card-img-top").appendTo(cardBody);
-
+            $("<img>").attr("src", iconURL).addClass("card-img-top forecast-card-image").appendTo(cardBody);
             $("<p>").text("Description: " + dayData.weather[0].description).appendTo(cardBody);
             $("<p>").text("Temperature: " + dayData.main.temp.toFixed(2) + "°C").appendTo(cardBody);
             $("<p>").text("Wind: " + dayData.wind.speed + "m/s, Direction: " + dayData.wind.deg + "°").appendTo(cardBody);
@@ -141,24 +145,28 @@ function futureForecast(city) {
 
 // Save event
 function saveHistory(event) {
-    var textInput = cityInput.val();
-    displayCityInfo(textInput)
-        .then(function (search) {
-            localStorage.setItem("search-history", JSON.stringify(cities));
-            console.log("Stored search history:", JSON.parse(localStorage.getItem("search-history")));
-
-        })
-        .catch(function (error) {
-            console.log("Error fetching and saving data:", error); 
-        });
+    localStorage.setItem("search-history", JSON.stringify(cities));
 }
+
+//     var textInput = cityInput.val();
+//     displayCityInfo(textInput)
+//         .then(function (search) {
+//             localStorage.setItem("search-history", JSON.stringify(cities));
+//             console.log("Stored search history:", JSON.parse(localStorage.getItem("search-history")));
+
+//         })
+//         .catch(function (error) {
+//             console.log("Error fetching and saving data:", error); 
+//         });
+// }
 
 $("#search-button").on("click", function (event) {
     event.preventDefault();
     var textInput = cityInput.val();
-        if (!cities.includes(textInput)) {
+
+    if (!cities.includes(textInput)) {
         cities.push(textInput);
-        }
+    }
 
     renderButtons();
     displayCityInfo(textInput);
