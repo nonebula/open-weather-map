@@ -48,10 +48,11 @@ function displayCityInfo(city) {
 
             var todayContainer = $("#today")
 
-            var todayContainerCard = $("<div>").addClass("card").appendTo(todayContainer);
+            var todayContainerCard = $("<div>").addClass("card today-card").appendTo(todayContainer);
             var cardBody = $("<div>").addClass("card-body").appendTo(todayContainerCard);
 
             $("<h2>").text(data.name).appendTo(cardBody); //today's date needs to be added here
+            $("<h5>").text(dayjs(data.dt_txt).format("dddd, MMMM D")).addClass("date").appendTo(cardBody);
             var iconURL = "http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png";
             $("<img>").attr("src", iconURL).addClass("card-img-top today-card-image").appendTo(cardBody);
             $("<p>").text("Description: " + data.weather[0].description).appendTo(cardBody);
@@ -127,10 +128,10 @@ function futureForecast(city) {
         for (var i = 0; i < 5; i++) {
             var dayData = data.list[i * 8];
             
-            var card = $("<div>").addClass("card").appendTo(forecastContainer);
+            var card = $("<div>").addClass("card forecast-card").appendTo(forecastContainer);
             var cardBody = $("<div>").addClass("card-body").appendTo(card);
 
-            $("<h5>").text(dayjs(dayData.dt_txt).format("dddd, MMMM D")).appendTo(cardBody);
+            $("<h5>").text(dayjs(dayData.dt_txt).format("dddd, MMMM D")).addClass("date").appendTo(cardBody);
             var iconURL = "http://openweathermap.org/img/wn/" + dayData.weather[0].icon + ".png";
             $("<img>").attr("src", iconURL).addClass("card-img-top forecast-card-image").appendTo(cardBody);
             $("<p>").text("Description: " + dayData.weather[0].description).appendTo(cardBody);

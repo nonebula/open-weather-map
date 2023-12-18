@@ -1,4 +1,4 @@
-/* .weather-header {
+.weather-header {
  background-color: rgba(255, 0, 0, 0.6);
  font-family: Arial, Helvetica, sans-serif;
  display: flex;
@@ -19,74 +19,32 @@ font-size: 28px;
 font-weight: bold;
 }
 
-h3 {
+/* search section */
+#form-heading {
+    padding: 20px;
+}
 
+#search-form {
+    padding: 20px;
+}
+
+#search-button {
+    margin-top: 15px;
+    margin-left: 10px;
+    padding: 20px;
+}
+
+.weather-search {
+    text-align: center;
+}
+
+.date {
+    font-weight: bold;
 }
 
 p {
 font-size: 20px;
 }
-
-.form-label {
-
-}
-
-.search-form {
-
-}
-
-.search-button {
-
-}
-
-button {
-border-radius: 20%;
-}
-
-.history-button {
-
-}
-
-.search-form {
-
-}
-
-.search-input {
-
-}
-
-.history button {
-
-}
-
-#today {
-border: solid 5px;
-border-color: black;
-/* display: grid; 
-padding: 25px;
-}
-
-#forecast {
-
-}
-
-aside {
-
-}
-
-
-
-.left-side-container {
-    display: inline-flex; 
-    justify-content: left;
-    padding: 25px;
-}
-
-
-.right-side-container {
-    display: inline-flex;
-    padding: 25px;
-} */
 
 .today-card-image {
     height: 50px;
@@ -96,4 +54,13 @@ aside {
 .forecast-card-image {
     height: 50px;
     width: 50px;
+}
+
+.forecast-card {
+    width: 18rem;
+    align-items: center;
+}
+
+.today-card {
+    align-items: center;
 }
