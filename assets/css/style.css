@@ -1,3 +1,9 @@
+/* Header formatting */
+.weather-header {
+    background-color: hsl(240, 70%, 25%);
+    color: white;
+}
+
 /* Document formatting */  
   body {
     font-family: Arial, Helvetica, sans-serif;
@@ -63,12 +69,18 @@
     margin-top: 15px;
     padding: 10px; 
     width: 100%;
+    background-color: hsl(240, 70%, 60%);
+    border-color: darkblue;
+    color: white;
   }
 
   .history-button {
     align-items: left;
     text-align: center;
     margin-bottom: 5px;
+    background-color: hsl(0, 0%, 60%);
+    border-color: darkgray;
+    color: black;
   }
   
   #history {
@@ -98,6 +110,8 @@
     width: 100%;
     align-items: center;
     justify-content: center;
+    border: solid 2px;
+    border-color: black;
   }
   
   /* Forecast card styling */
@@ -110,17 +124,8 @@
     align-items: center;
     justify-content: center;
     max-width: 20%;
-  }
-
-
-  .today-card {
-    background-color: grey;
-    border: ;
-    border-color: ;
-  }
-
-  .forecast-card {
-    background-color: white;
-    border: ;
-    border-color: ;
+    background-color: hsl(240, 70%, 25%);
+    border-color: lightblue;
+    border: solid 2px;
+    color: white;
   }

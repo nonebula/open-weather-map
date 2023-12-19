@@ -14,7 +14,6 @@ The goal of this project was to develop a weather program for today and the foll
 * [Credits](#credits)
 * [License](#license)
 
-
 ## Installation
 This project is a website hosted on GitHub. To access and use the website, follow these steps:
 
@@ -33,7 +32,7 @@ The page demonstrates full functionality. Click on any of the text areas to add 
 
 ## Credits
 
-The project was completed independently but built off the source code from: edX Boot Camps LLC. I worked with a tutor, Armando Osorio, to explore the fundamentals of Javascript and clarify my work. I also worked through the modules on Codecademy to better develop my understanding to enable me to solve this challenge. In producing this webpage, I also utilized a range of tutorials from W3 Schools and referred to multiple posts on Stack Overflow. I also utilized the support of the course teaching assistants and referred to the openweathermap API documentation and guide.
+The project was completed independently but built off the source code from: edX Boot Camps LLC. I worked with a tutor, Armando Osorio, to explore the fundamentals of Javascript and clarify my work. I also worked through the modules on Codecademy to better develop my understanding to enable me to solve this challenge. In producing this webpage, I also utilized a range of tutorials from W3 Schools and referred to multiple posts on Stack Overflow. I also utilized the support of the course teaching assistants and referred to the openweathermap API documentation [https://openweathermap.org/api] and guide [https://openweathermap.org/guide].
 
 ## License
 
