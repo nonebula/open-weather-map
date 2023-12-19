@@ -43,7 +43,7 @@ function displayCityInfo(city) {
         .addClass("card today-card")
         .appendTo(todayContainer);
       var cardImage = $("<div>")
-        .addClass("card-img-top")
+        .addClass("card-body")
         .appendTo(todayContainerCard);
       var cardBody = $("<div>")
         .addClass("card-body")
@@ -51,7 +51,7 @@ function displayCityInfo(city) {
 
       $("<h2>").text(data.name).appendTo(cardBody); //today's date needs to be added here
       $("<h5>")
-        .text(dayjs(data.dt_txt).format("dddd, MMMM D"))
+        .text(dayjs(data.dt_txt).format("dddd D MMMM YYYY"))
         .addClass("date")
         .appendTo(cardBody);
       var iconURL =
@@ -61,14 +61,14 @@ function displayCityInfo(city) {
         .addClass("today-card-image")
         .appendTo(cardImage);
       $("<p>")
-        .text("Description: " + data.weather[0].description)
+        .text("Today's weather is " + data.weather[0].description + "!")
         .appendTo(cardBody);
       $("<p>")
-        .text("Temperature: " + data.main.temp.toFixed(2) + "°C")
+        .text("Temp: " + data.main.temp.toFixed(2) + "°C")
         .appendTo(cardBody);
       $("<p>")
         .text(
-          "Wind: " + data.wind.speed + "m/s, Direction: " + data.wind.deg + "°"
+          "Wind: " + data.wind.speed + "m/s"
         )
         .appendTo(cardBody);
       $("<p>")
@@ -134,7 +134,7 @@ function futureForecast(city) {
         var cardBody = $("<div>").addClass("card-body").appendTo(card);
 
         $("<h5>")
-          .text(dayjs(dayData.dt_txt).format("dddd, MMMM D"))
+          .text(dayjs(dayData.dt_txt).format("DD/MM/YYYY"))
           .addClass("date")
           .appendTo(cardBody);
         var iconURL =
@@ -146,18 +146,16 @@ function futureForecast(city) {
           .addClass("forecast-card-image")
           .appendTo(cardImage);
         $("<p>")
-          .text("Description: " + dayData.weather[0].description)
+          .text("There will be " + dayData.weather[0].description + ".")
           .appendTo(cardBody);
         $("<p>")
-          .text("Temperature: " + dayData.main.temp.toFixed(2) + "°C")
+          .text("Temp: " + dayData.main.temp.toFixed(2) + "°C")
           .appendTo(cardBody);
         $("<p>")
           .text(
             "Wind: " +
               dayData.wind.speed +
-              "m/s, Direction: " +
-              dayData.wind.deg +
-              "°"
+              "m/s"
           )
           .appendTo(cardBody);
         $("<p>")
