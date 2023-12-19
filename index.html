@@ -22,9 +22,9 @@
     </header>
 
     <!-- max-width for ultra wide resolutions -->
-    <div class="container-fluid left-side-container" style="max-width: 1400px">
+    <div class="container-fluid" style="max-width: 1400px">
       <div class="row">
-        <aside class="col-lg-3 pb-3">
+        <aside class="col-lg-3 pb-3 left-side-container">
           <h2 id="form-heading" class="mt-1 h3 form-label">
             Search for a City:
           </h2>
@@ -40,7 +40,7 @@
                   aria-labelledby="form-heading"
                   aria-controls="today forecast"
                 />
-                <div class="input-group-append">
+                <div class="input-group-append search-div">
                   <!-- This button will trigger our Fetch call -->
                   <button
                     type="submit"
@@ -68,7 +68,6 @@
           <div id="today"></div>
             <!--  today card -->
           <div class="card" style="width: 18rem;">
-            </div>
           </div>
         </section>
         <section

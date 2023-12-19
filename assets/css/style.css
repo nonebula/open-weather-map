@@ -1,66 +1,117 @@
-.weather-header {
- background-color: rgba(255, 0, 0, 0.6);
- font-family: Arial, Helvetica, sans-serif;
- display: flex;
- justify-content: center;
-}
-
-body {
+/* Document formatting */  
+  body {
     font-family: Arial, Helvetica, sans-serif;
-}
-
-h1 {
-color: white;
-font-size: 50px;
-}
-
-h2 {
-font-size: 28px;
-font-weight: bold;
-}
-
-/* search section */
-#form-heading {
-    padding: 20px;
-}
-
-#search-form {
-    padding: 20px;
-}
-
-#search-button {
-    margin-top: 15px;
-    margin-left: 10px;
-    padding: 20px;
-}
-
-.weather-search {
-    text-align: center;
-}
-
-.date {
+  }
+  
+  h1 {
+    color: white;
+    font-size: 50px;
+  }
+  
+  h2 {
+    font-size: 28px;
     font-weight: bold;
+  }
+  
+  .date {
+    font-weight: bold;
+  }
+  
+  p {
+    font-size: 20px;
+  }
+  
+  /* Left and right side containers */
+  .left-side-container {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
+  }
+
+  .right-side-container {
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    width: 100%;
+  }
+
+  /* Search and history section */
+  #form-heading {
+    padding: 20px;
+  }
+  
+  #search-form {
+    padding: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .weather-search {
+    height: 100px;
+  }
+
+  #search-input {
+    margin-bottom: 10px; 
+  }
+  
+.search-div {
+    width: 100%;
 }
 
-p {
-font-size: 20px;
-}
+  #search-button {
+    margin-top: 15px;
+    padding: 10px; 
+    width: 100%;
+  }
 
-.today-card-image {
+  .history-button {
+    align-items: left;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  
+  #history {
+    width: 100%;
+  }
+
+  .form-input {
+    width: 100%; 
+  }
+  
+  .list-group-item {
+    width: 100%;
+    text-align: left;
+  }
+  
+  .weather-search {
+    text-align: center;
+  }
+  
+  /* Today card styling */
+  .today-card-image {
     height: 50px;
     width: 50px;
-}
-
-.forecast-card-image {
+  }
+  
+  .today-card {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Forecast card styling */
+  .forecast-card-image {
     height: 50px;
     width: 50px;
-}
-
-.forecast-card {
-    width: 18rem;
+  }
+  
+  .forecast-card {
     align-items: center;
-}
-
-.today-card {
-    align-items: center;
-}
+    justify-content: center;
+    max-width: 20%;
+  }
+  
+  .forecast-card-image {
+    width: 50px;
+  }
