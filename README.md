@@ -26,7 +26,7 @@ This project is a website hosted on GitHub. To access and use the website, follo
 If you encounter any issues or have questions, please refer to the documentation or contact the developers.
 
 ## Usage 
-The page demonstrates full functionality. Click on any of the text areas to add your own tasks and notes for the day. The colors of the webpage will change as time passes throughout the day. Grey means the hour has passed, red indicated present and green indicates the future. All text will be removed from the page if you do not click the 'save' icon, so make sure to save any progress!
+The page demonstrates full functionality. Click on any button from your search history to view your history. Search for new cities in the search bar. The page may appear empty without any of your input, this is fine and as intended.
 
 ![Website Screenshot](./assets/images/screenshot.png)
 
